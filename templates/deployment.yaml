@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Chart.Name }}-server"
+  labels:
+    app: "{{ .Chart.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "{{ .Chart.Name }}"
+      release: "{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Chart.Name }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      containers:
+      - name: "{{ .Chart.Name }}"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        env:
+        - name: BIND
+          value: "{{ .Values.env.bindIP }}"
+        - name: CONSOLE_LOG_LOCATION
+          value: "{{ .Values.env.consoleLogLocation }}"
+        - name: DLC_SPACE_AGE
+          value: "{{ .Values.env.dlcSpaceAge }}"
+        - name: PORT
+          value: "{{ .Values.env.gamePort }}"
+        - name: GENERATE_NEW_SAVE
+          value: "{{ .Values.env.generateNewSave }}"
+        - name: LOAD_LATEST_SAVE
+          value: "{{ .Values.env.loadLatestSave }}"
+        - name: MODS
+          value: "{{ .Values.env.mods }}"
+        - name: RCON_PORT
+          value: "{{ .Values.env.rconPort }}"
+        - name: SAVE_NAME
+          value: "{{ .Values.env.saveName }}"
+        - name: TOKEN
+          value: "{{ .Values.env.token }}"
+        - name: UPDATE_MODS_ON_START
+          value: "{{ .Values.env.updateModsOnStart }}"
+        - name: USERNAME
+          value: "{{ .Values.env.username }}"
+        ports:
+        - name: game-port
+          containerPort: {{ .Values.env.gamePort | int }}
+          hostIP: {{ .Values.env.hostIP }}
+          hostPort: {{ .Values.env.gamePort | int }}
+          protocol: UDP
+        - name: rcon-port
+          containerPort: {{ .Values.env.rconPort | int }}
+          hostIP: {{ .Values.env.hostIP }}
+          hostPort: {{ .Values.env.rconPort | int }}
+          protocol: TCP
+        volumeMounts:
+        - name: factorio-data
+          mountPath: /factorio
+      volumes:
+      - name: factorio-data
+        persistentVolumeClaim:
+          claimName: "{{ .Chart.Name }}-pvc-data"
+      hostNetwork: {{ .Values.service.hostNetwork }}
+

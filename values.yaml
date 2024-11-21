@@ -1,0 +1,33 @@
+image:
+  repository: factoriotools/factorio
+  tag: latest
+
+service:
+  type: ClusterIP
+  hostNetwork: "false"
+
+resources:
+  requests:
+    memory: 2G
+    cpu: 1.0
+
+volumes:
+  dataPVC:
+    size: 50Gi
+  storageClassName: "longhorn"
+
+env:
+  bindIP: 0.0.0.0
+  consoleLogLocation: ''
+  dlcSpaceAge: true
+  gamePort: 34197
+  generateNewSave: false
+  hostIP: 0.0.0.0
+  loadLatestSave: true
+  mods: '/factorio/mods'
+  rconPort: 27015
+  saveName: _autosave1
+  token: ''
+  updateModsOnStart: ''
+  username: ''
+  

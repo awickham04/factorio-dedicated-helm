@@ -1,0 +1,14 @@
+apiVersion: v1
+name: factorio-dedicated-server
+version: 1.0.0
+description: Factorio dedicated server.
+keywords:
+- game
+- server
+home: https://www.factorio.com/
+sources:
+- https://hub.docker.com/r/factoriotools/factorio
+maintainers:
+  - name: awickham04
+    url: https://github.com/awickham04
+
