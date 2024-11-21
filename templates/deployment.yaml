@@ -41,17 +41,17 @@ spec:
         - name: LOAD_LATEST_SAVE
           value: "{{ .Values.env.loadLatestSave }}"
         - name: MODS
-          value: "{{ .Values.env.mods }}"
+          value: "{{ .Values.env.modsDir }}"
         - name: RCON_PORT
           value: "{{ .Values.env.rconPort }}"
         - name: SAVE_NAME
           value: "{{ .Values.env.saveName }}"
         - name: TOKEN
-          value: "{{ .Values.env.token }}"
+          value: "{{ .Values.env.gameToken }}"
         - name: UPDATE_MODS_ON_START
           value: "{{ .Values.env.updateModsOnStart }}"
         - name: USERNAME
-          value: "{{ .Values.env.username }}"
+          value: "{{ .Values.env.userName }}"
         ports:
         - name: game-port
           containerPort: {{ .Values.env.gamePort | int }}

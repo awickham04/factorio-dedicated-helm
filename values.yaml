@@ -24,10 +24,10 @@ env:
   generateNewSave: false
   hostIP: 0.0.0.0
   loadLatestSave: true
-  mods: '/factorio/mods'
+  modsDir: '/factorio/mods'
   rconPort: 27015
   saveName: _autosave1
-  token: ''
+  gameToken: ''
   updateModsOnStart: ''
-  username: ''
+  userName: ''
   
