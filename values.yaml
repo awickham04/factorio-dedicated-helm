@@ -20,14 +20,21 @@ env:
   bindIP: 0.0.0.0
   consoleLogLocation: ''
   dlcSpaceAge: true
+  gamePassword: changeme
   gamePort: 34197
   generateNewSave: false
   hostIP: 0.0.0.0
   loadLatestSave: true
+  maxPlayers: 0
   modsDir: '/factorio/mods'
   rconPort: 27015
   saveName: _autosave1
+  serverDescription: Server Description
+  serverLan: true
+  serverName: servername
+  serverPublic: true
   gameToken: ''
   updateModsOnStart: ''
   userName: ''
+  userVerification: true
   
