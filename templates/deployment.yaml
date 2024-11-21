@@ -25,6 +25,15 @@ spec:
       - name: "{{ .Chart.Name }}"
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
+        securityContext:
+          runAsNonRoot: true
+          readOnlyRootFilesystem: false
+          capabilities:
+            add:
+            - ALL
+          privileged: false
+          allowPrivilegeEscalation: false
+          runAsUser: 845
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         env:
